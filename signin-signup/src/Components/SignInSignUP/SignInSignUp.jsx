@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './SignInSignUp.css'
 
 import user_icon from '../Assests/user.png'
@@ -8,36 +8,50 @@ import password_icon from '../Assests/padlock.png'
 
 
 export const SignInSignUp = () => {
+
+    const[action,setAction] = useState("Sign Up");
+
   return (
     <div className='container'>
         <div className='header'>
-            <div className="text">Sign Up</div>
+            <div className="text">{action}</div>
             <div className="underline"></div>
         </div>
 
         <div className="inputs">
-            <div className="input">
-                <img src={user_icon} alt="" />
-                <input type="text" />
-            </div>
+
+            {
+                action === "Sign In"?<div></div>: 
+                    <div className="input">
+                        <img src={user_icon} alt="" />
+                        <input type="text" placeholder='Name'/>
+                    </div>
+            }
+
+            
 
             <div className="input">
                 <img src={email_icon} alt="" />
-                <input type="email" />
+                <input type="email" placeholder='Email'/>
             </div>
 
             <div className="input">
                 <img src={password_icon} alt="" />
-                <input type="password" />
+                <input type="password" placeholder='Password'/>
             </div>
 
         </div>
 
-        <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
+        {
+        action === "Sign Up"?<div></div>:
+            <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
+        }
+
+        
 
         <div className="submit-container">
-            <div className="submit">Sign Up</div>
-            <dive className="submit">Sign In</dive>
+            <div className={action === "Sign In" ? "submit gray" : "submit"} onClick={()=>{setAction("Sign Up")}}>Sign Up</div>
+            <div className={action === "Sign Up" ? "submit gray" : "submit"} onClick={()=>{setAction("Sign In")}}>Sign In</div>
         </div>
 
     </div>
